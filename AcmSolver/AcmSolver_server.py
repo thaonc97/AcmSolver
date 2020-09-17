@@ -19,13 +19,19 @@ class ACMSolverServicer(ACMSolver_pb2_grpc.ACMSolverServicer):
     def SetPlaces(self, request_iterator, context):
         response = ACMSolver_pb2.SetResult()
         places =[]
+        max_record = 1000
+        count = 0
         for place in request_iterator:
+            count = count + 1
             dict_place = MessageToDict(place)
             places.append(dict_place)
-        data_manipulate.set_place_to_db(
-            places,self.connection_str,self.db_name,self.place_stat_collection)
+            if count % 1000 ==0:
+                data_manipulate.set_place_to_db(
+                    places,self.connection_str,self.db_name,self.place_stat_collection)
+                places =[]
+
         response.set_result = True
-        print("Places set Sucessfully!")
+        print("Places set sucessfully!")
         return response
     
     def SetShareRate(self,request,context):
