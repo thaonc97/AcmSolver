@@ -15,32 +15,70 @@ class ACMSolverServicer(ACMSolver_pb2_grpc.ACMSolverServicer):
         self.connection_str = "mongodb://118.70.206.204:27017/"
         self.db_name = "ThaoLearnDB"
         self.place_stat_collection = "inputLocation"
+        self.share_rate_collection = "shareRate"
+        self.campaign_collection = "inputCampaign"
 
     def SetPlaces(self, request_iterator, context):
         response = ACMSolver_pb2.SetResult()
         places =[]
-        max_record = 1000
+        insert_threshold = 1000
         count = 0
         for place in request_iterator:
             count = count + 1
             dict_place = MessageToDict(place)
             places.append(dict_place)
-            if count % 1000 ==0:
-                data_manipulate.set_place_to_db(
-                    places,self.connection_str,self.db_name,self.place_stat_collection)
+            if count % insert_threshold ==0: #insert to db every 'insert_threshold' records
+                data_manipulate.set_db(places,self.connection_str,self.db_name,self.place_stat_collection)
                 places =[]
 
+        data_manipulate.set_db(places,self.connection_str,self.db_name,self.place_stat_collection) #insert the remainders
         response.set_result = True
-        print("Places set sucessfully!")
         return response
     
     def SetShareRate(self,request,context):
         response = ACMSolver_pb2.SetResult()
+        share_rate_info = MessageToDict(request)
+        data_manipulate.set_db(
+            share_rate_info,self.connection_str,self.db_name,self.share_rate_collection,insert_many=False)
         response.set_result = True
-        print('Set Thanh cong')
         return response
+    
+    def SetCampaign(self,request_iterator,contex): #Thiết lập danh sách campaign trong trường hợp SP, đồng thời đóng vai trò campaign domain nếu là NP
+        response = ACMSolver_pb2.SetResult()
+        campaigns =[]
+        insert_threshold = 1000
+        count = 0
+        for campaign in request_iterator:
+            count = count + 1
+            # campaign.is_network = False
+            dict_campaign = MessageToDict(campaign)
+            campaigns.append(dict_campaign)
+            if count % insert_threshold ==0: #insert to db every 'insert_threshold' records
+                data_manipulate.set_db(campaigns,self.connection_str,self.db_name,self.campaign_collection)
+                campaigns =[]
 
+        data_manipulate.set_db(campaigns,self.connection_str,self.db_name,self.campaign_collection) #insert the remainders
+        response.set_result = True
+        return response
+    
+    def SetNetworkCampaign(self,request_iterator,contex): #Thiết lập danh sách campaign trong trường hợp SP, đồng thời đóng vai trò campaign domain nếu là NP
+        response = ACMSolver_pb2.SetResult()
+        campaigns =[]
+        insert_threshold = 1000
+        count = 0
+        for campaign in request_iterator:
+            count = count + 1
+            # campaign.is_network = True
+            dict_campaign = MessageToDict(campaign)
+            campaigns.append(dict_campaign)
 
+            if count % insert_threshold ==0: #insert to db every 'insert_threshold' records
+                data_manipulate.set_db(campaigns,self.connection_str,self.db_name,self.campaign_collection)
+                campaigns =[]
+
+        data_manipulate.set_db(campaigns,self.connection_str,self.db_name,self.campaign_collection) #insert the remainders
+        response.set_result = True
+        return response
 
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 # use the generated function `add_CalculatorServicer_to_server`

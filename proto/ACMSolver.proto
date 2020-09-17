@@ -12,7 +12,7 @@ message ASCampaign {
     int32 type = 6;           
     int32 total = 7;
     repeated int32 place_ids = 8 [packed =true];
-    map<int32,int32> weights = 9;
+    map<string,int32> weights = 9;
     //WARING!!! THIEU PROFILES
     //WARING!!! THIEU PROFILES
     //WARING!!! THIEU PROFILES
