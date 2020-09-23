@@ -1,13 +1,23 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
 package ACMSolver;
 
+message SetPlacesRequest {
+    ProblemId problem_id = 1;
+    ASPlaceStat place = 2;
+}
+
+message SetCampaignsRequest{
+    ProblemId problem_id = 1;
+    ASCampaign campaign = 2;
+}
+
 message ASCampaign {
-    string problem_id = 1;
-    int32 original_campaign_id = 2;
-    bool is_network = 10;
-    int32 start_date = 3;
-    int32 expired_date = 4;
+    int32 original_campaign_id = 1;
+    bool is_network = 2;
+    google.protobuf.Timestamp start_date = 3;
+    google.protobuf.Timestamp expired_date = 4;
     int32 priority = 5;
     int32 type = 6;           
     int32 total = 7;
@@ -22,7 +32,7 @@ message ASCampaign {
 }
 
 message ASPlaceStat {
-    string problem_id = 1;
+    
     int32 original_place_id = 2;
     map<string, float> ctrs  = 3;
     repeated ProfileType profiles_ratio = 4;
@@ -31,13 +41,13 @@ message ASPlaceStat {
 
 message ProfileType {
     int32 type = 1;
-    repeated float details = 2 [packed = true ];
+    repeated float details = 2 [packed = true];
 }
 
 message ASResult {
-    string problem_id = 1;
+    ProblemId problem_id = 1;
     int32 campaign_id = 2;
-    int32 date = 3;
+    google.protobuf.Timestamp date = 3;
     int64 place_id = 4;
     float view = 5;
 }
@@ -47,14 +57,26 @@ message SetResult{
 }
 
 message ShareRate {
-    string problem_id =1;
+    ProblemId problem_id =1;
     float r = 2;
+}
+message ProblemId {
+    string problem_id =1 ;
+}
+message SolveStatus {
+
+}
+
+message ProblemType {
+    string type = 1;
 }
 
 service ACMSolver{
-    rpc SetPlaces(stream ASPlaceStat) returns (SetResult) {} ;          //2
-    rpc SetShareRate(ShareRate) returns (SetResult) {};                 //5
-    rpc SetCampaign(stream ASCampaign) returns (SetResult) {};          //3
-    rpc SetNetworkCampaign(stream ASCampaign) returns (SetResult) {};   //4
+    rpc InitProblem(ProblemType) returns (ProblemId);                           //1
+    rpc SetPlaces(stream SetPlacesRequest) returns (SetResult) {} ;             //2
+    rpc SetCampaign(stream SetCampaignsRequest) returns (SetResult) {};         //3
+    rpc SetNetworkCampaign(stream SetCampaignsRequest) returns (SetResult) {};  //4
+    rpc SetShareRate(ShareRate) returns (SetResult) {};                         //5
+    rpc Solve(ProblemId) returns (SolveStatus) {};                              //6
+    rpc GetResult(ProblemId) returns (stream ASResult) {};                      //7
 }
-

@@ -14,9 +14,24 @@ class ACMSolverStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.InitProblem = channel.unary_unary(
+                '/ACMSolver.ACMSolver/InitProblem',
+                request_serializer=ACMSolver__pb2.ProblemType.SerializeToString,
+                response_deserializer=ACMSolver__pb2.ProblemId.FromString,
+                )
         self.SetPlaces = channel.stream_unary(
                 '/ACMSolver.ACMSolver/SetPlaces',
-                request_serializer=ACMSolver__pb2.ASPlaceStat.SerializeToString,
+                request_serializer=ACMSolver__pb2.SetPlacesRequest.SerializeToString,
+                response_deserializer=ACMSolver__pb2.SetResult.FromString,
+                )
+        self.SetCampaign = channel.stream_unary(
+                '/ACMSolver.ACMSolver/SetCampaign',
+                request_serializer=ACMSolver__pb2.SetCampaignsRequest.SerializeToString,
+                response_deserializer=ACMSolver__pb2.SetResult.FromString,
+                )
+        self.SetNetworkCampaign = channel.stream_unary(
+                '/ACMSolver.ACMSolver/SetNetworkCampaign',
+                request_serializer=ACMSolver__pb2.SetCampaignsRequest.SerializeToString,
                 response_deserializer=ACMSolver__pb2.SetResult.FromString,
                 )
         self.SetShareRate = channel.unary_unary(
@@ -24,28 +39,29 @@ class ACMSolverStub(object):
                 request_serializer=ACMSolver__pb2.ShareRate.SerializeToString,
                 response_deserializer=ACMSolver__pb2.SetResult.FromString,
                 )
-        self.SetCampaign = channel.stream_unary(
-                '/ACMSolver.ACMSolver/SetCampaign',
-                request_serializer=ACMSolver__pb2.ASCampaign.SerializeToString,
-                response_deserializer=ACMSolver__pb2.SetResult.FromString,
+        self.Solve = channel.unary_unary(
+                '/ACMSolver.ACMSolver/Solve',
+                request_serializer=ACMSolver__pb2.ProblemId.SerializeToString,
+                response_deserializer=ACMSolver__pb2.SolveStatus.FromString,
                 )
-        self.SetNetworkCampaign = channel.stream_unary(
-                '/ACMSolver.ACMSolver/SetNetworkCampaign',
-                request_serializer=ACMSolver__pb2.ASCampaign.SerializeToString,
-                response_deserializer=ACMSolver__pb2.SetResult.FromString,
+        self.GetResult = channel.unary_stream(
+                '/ACMSolver.ACMSolver/GetResult',
+                request_serializer=ACMSolver__pb2.ProblemId.SerializeToString,
+                response_deserializer=ACMSolver__pb2.ASResult.FromString,
                 )
 
 
 class ACMSolverServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def SetPlaces(self, request_iterator, context):
-        """Missing associated documentation comment in .proto file."""
+    def InitProblem(self, request, context):
+        """1
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SetShareRate(self, request, context):
+    def SetPlaces(self, request_iterator, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -63,12 +79,45 @@ class ACMSolverServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SetShareRate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Solve(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetResult(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ACMSolverServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'InitProblem': grpc.unary_unary_rpc_method_handler(
+                    servicer.InitProblem,
+                    request_deserializer=ACMSolver__pb2.ProblemType.FromString,
+                    response_serializer=ACMSolver__pb2.ProblemId.SerializeToString,
+            ),
             'SetPlaces': grpc.stream_unary_rpc_method_handler(
                     servicer.SetPlaces,
-                    request_deserializer=ACMSolver__pb2.ASPlaceStat.FromString,
+                    request_deserializer=ACMSolver__pb2.SetPlacesRequest.FromString,
+                    response_serializer=ACMSolver__pb2.SetResult.SerializeToString,
+            ),
+            'SetCampaign': grpc.stream_unary_rpc_method_handler(
+                    servicer.SetCampaign,
+                    request_deserializer=ACMSolver__pb2.SetCampaignsRequest.FromString,
+                    response_serializer=ACMSolver__pb2.SetResult.SerializeToString,
+            ),
+            'SetNetworkCampaign': grpc.stream_unary_rpc_method_handler(
+                    servicer.SetNetworkCampaign,
+                    request_deserializer=ACMSolver__pb2.SetCampaignsRequest.FromString,
                     response_serializer=ACMSolver__pb2.SetResult.SerializeToString,
             ),
             'SetShareRate': grpc.unary_unary_rpc_method_handler(
@@ -76,15 +125,15 @@ def add_ACMSolverServicer_to_server(servicer, server):
                     request_deserializer=ACMSolver__pb2.ShareRate.FromString,
                     response_serializer=ACMSolver__pb2.SetResult.SerializeToString,
             ),
-            'SetCampaign': grpc.stream_unary_rpc_method_handler(
-                    servicer.SetCampaign,
-                    request_deserializer=ACMSolver__pb2.ASCampaign.FromString,
-                    response_serializer=ACMSolver__pb2.SetResult.SerializeToString,
+            'Solve': grpc.unary_unary_rpc_method_handler(
+                    servicer.Solve,
+                    request_deserializer=ACMSolver__pb2.ProblemId.FromString,
+                    response_serializer=ACMSolver__pb2.SolveStatus.SerializeToString,
             ),
-            'SetNetworkCampaign': grpc.stream_unary_rpc_method_handler(
-                    servicer.SetNetworkCampaign,
-                    request_deserializer=ACMSolver__pb2.ASCampaign.FromString,
-                    response_serializer=ACMSolver__pb2.SetResult.SerializeToString,
+            'GetResult': grpc.unary_stream_rpc_method_handler(
+                    servicer.GetResult,
+                    request_deserializer=ACMSolver__pb2.ProblemId.FromString,
+                    response_serializer=ACMSolver__pb2.ASResult.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -95,6 +144,23 @@ def add_ACMSolverServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class ACMSolver(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def InitProblem(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ACMSolver.ACMSolver/InitProblem',
+            ACMSolver__pb2.ProblemType.SerializeToString,
+            ACMSolver__pb2.ProblemId.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def SetPlaces(request_iterator,
@@ -108,7 +174,41 @@ class ACMSolver(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.stream_unary(request_iterator, target, '/ACMSolver.ACMSolver/SetPlaces',
-            ACMSolver__pb2.ASPlaceStat.SerializeToString,
+            ACMSolver__pb2.SetPlacesRequest.SerializeToString,
+            ACMSolver__pb2.SetResult.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetCampaign(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_unary(request_iterator, target, '/ACMSolver.ACMSolver/SetCampaign',
+            ACMSolver__pb2.SetCampaignsRequest.SerializeToString,
+            ACMSolver__pb2.SetResult.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetNetworkCampaign(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_unary(request_iterator, target, '/ACMSolver.ACMSolver/SetNetworkCampaign',
+            ACMSolver__pb2.SetCampaignsRequest.SerializeToString,
             ACMSolver__pb2.SetResult.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -131,7 +231,7 @@ class ACMSolver(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def SetCampaign(request_iterator,
+    def Solve(request,
             target,
             options=(),
             channel_credentials=None,
@@ -141,14 +241,14 @@ class ACMSolver(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_unary(request_iterator, target, '/ACMSolver.ACMSolver/SetCampaign',
-            ACMSolver__pb2.ASCampaign.SerializeToString,
-            ACMSolver__pb2.SetResult.FromString,
+        return grpc.experimental.unary_unary(request, target, '/ACMSolver.ACMSolver/Solve',
+            ACMSolver__pb2.ProblemId.SerializeToString,
+            ACMSolver__pb2.SolveStatus.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def SetNetworkCampaign(request_iterator,
+    def GetResult(request,
             target,
             options=(),
             channel_credentials=None,
@@ -158,8 +258,8 @@ class ACMSolver(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_unary(request_iterator, target, '/ACMSolver.ACMSolver/SetNetworkCampaign',
-            ACMSolver__pb2.ASCampaign.SerializeToString,
-            ACMSolver__pb2.SetResult.FromString,
+        return grpc.experimental.unary_stream(request, target, '/ACMSolver.ACMSolver/GetResult',
+            ACMSolver__pb2.ProblemId.SerializeToString,
+            ACMSolver__pb2.ASResult.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

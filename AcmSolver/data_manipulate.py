@@ -29,3 +29,25 @@ def set_db(data,con,db,collection,insert_many =True):
     if insert_many == True:
         working_collection.insert_many(data)
     print('Insert sucessfully!')
+
+def mass_insert_to_db(data_stream,connection_str,db_name,collection_name,request_type): # insert places,campaigns to db
+    client = pymongo.MongoClient(connection_str)
+    working_db = client[db_name]
+    working_collection = working_db[collection_name]
+    to_insert_list = []
+    insert_threshold = 1000
+    count = 0
+    for data in data_stream:
+        #print("data is ",data)
+        count += 1
+        problem_id = data.problem_id.problem_id
+        #print(problem_id)
+        dict_data =MessageToDict(data,including_default_value_fields=True)
+        data_to_insert = dict_data[request_type]
+        data_to_insert['problemId'] = problem_id
+        to_insert_list.append(data_to_insert)
+        if count % insert_threshold ==0:
+            working_collection.insert_many(to_insert_list)
+            
+    if to_insert_list[0]:
+        working_collection.insert_many(to_insert_list) #insert the remainders

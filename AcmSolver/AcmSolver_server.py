@@ -3,6 +3,7 @@ from concurrent import futures
 import time
 import numpy as np
 import pandas as pd
+import uuid
 from google.protobuf.json_format import MessageToJson
 from google.protobuf.json_format import MessageToDict
 
@@ -18,23 +19,29 @@ class ACMSolverServicer(ACMSolver_pb2_grpc.ACMSolverServicer):
         self.share_rate_collection = "shareRate"
         self.campaign_collection = "inputCampaign"
 
+    # def SetPlaces(self, request_iterator, context):
+    #     response = ACMSolver_pb2.SetResult()
+    #     places =[]
+    #     insert_threshold = 1000
+    #     count = 0
+    #     for place in request_iterator:
+    #         count = count + 1
+    #         dict_place = MessageToDict(place)
+    #         places.append(dict_place)
+    #         if count % insert_threshold ==0: #insert to db every 'insert_threshold' records
+    #             data_manipulate.set_db(places,self.connection_str,self.db_name,self.place_stat_collection)
+    #             places =[]
+
+    #     if places[0]:
+    #         data_manipulate.set_db(places,self.connection_str,self.db_name,self.place_stat_collection) #insert the remainders
+    #     response.set_result = True
+    #     return response
     def SetPlaces(self, request_iterator, context):
         response = ACMSolver_pb2.SetResult()
-        places =[]
-        insert_threshold = 1000
-        count = 0
-        for place in request_iterator:
-            count = count + 1
-            dict_place = MessageToDict(place)
-            places.append(dict_place)
-            if count % insert_threshold ==0: #insert to db every 'insert_threshold' records
-                data_manipulate.set_db(places,self.connection_str,self.db_name,self.place_stat_collection)
-                places =[]
-
-        data_manipulate.set_db(places,self.connection_str,self.db_name,self.place_stat_collection) #insert the remainders
+        data_manipulate.mass_insert_to_db(request_iterator,self.connection_str,self.db_name,self.place_stat_collection,request_type ='place')
         response.set_result = True
         return response
-    
+
     def SetShareRate(self,request,context):
         response = ACMSolver_pb2.SetResult()
         share_rate_info = MessageToDict(request)
@@ -43,43 +50,30 @@ class ACMSolverServicer(ACMSolver_pb2_grpc.ACMSolverServicer):
         response.set_result = True
         return response
     
-    def SetCampaign(self,request_iterator,contex): #Thiết lập danh sách campaign trong trường hợp SP, đồng thời đóng vai trò campaign domain nếu là NP
+    def SetCampaign(self,request_iterator,context): #Thiết lập danh sách campaign trong trường hợp SP, đồng thời đóng vai trò campaign domain nếu là NP
         response = ACMSolver_pb2.SetResult()
-        campaigns =[]
-        insert_threshold = 1000
-        count = 0
-        for campaign in request_iterator:
-            count = count + 1
-            # campaign.is_network = False
-            dict_campaign = MessageToDict(campaign)
-            campaigns.append(dict_campaign)
-            if count % insert_threshold ==0: #insert to db every 'insert_threshold' records
-                data_manipulate.set_db(campaigns,self.connection_str,self.db_name,self.campaign_collection)
-                campaigns =[]
-
-        data_manipulate.set_db(campaigns,self.connection_str,self.db_name,self.campaign_collection) #insert the remainders
+        data_manipulate.mass_insert_to_db(request_iterator,self.connection_str,self.db_name,self.campaign_collection,request_type ='campaign')
         response.set_result = True
         return response
     
-    def SetNetworkCampaign(self,request_iterator,contex): #Thiết lập danh sách campaign trong trường hợp SP, đồng thời đóng vai trò campaign domain nếu là NP
+    def SetNetworkCampaign(self,request_iterator,context): 
         response = ACMSolver_pb2.SetResult()
-        campaigns =[]
-        insert_threshold = 1000
-        count = 0
-        for campaign in request_iterator:
-            count = count + 1
-            # campaign.is_network = True
-            dict_campaign = MessageToDict(campaign)
-            campaigns.append(dict_campaign)
-
-            if count % insert_threshold ==0: #insert to db every 'insert_threshold' records
-                data_manipulate.set_db(campaigns,self.connection_str,self.db_name,self.campaign_collection)
-                campaigns =[]
-
-        data_manipulate.set_db(campaigns,self.connection_str,self.db_name,self.campaign_collection) #insert the remainders
+        data_manipulate.mass_insert_to_db(request_iterator,self.connection_str,self.db_name,self.campaign_collection,request_type ='campaign')
         response.set_result = True
         return response
 
+    def InitProblem(self,request,context):
+        prefix_sp = 'SP_'
+        prefix_np = 'NP_'
+        id_generated = uuid.uuid4()
+        if request.type == 'SP':
+            id_to_return = prefix_sp + str(id_generated)
+        if request.type == 'NP':
+            id_to_return = prefix_np + str(id_generated)
+        response = ACMSolver_pb2.ProblemId()
+        response.problem_id = id_to_return
+        return response
+    
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 # use the generated function `add_CalculatorServicer_to_server`
 # to add the defined class to the server

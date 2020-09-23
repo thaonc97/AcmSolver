@@ -11,6 +11,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -19,10 +20,89 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0f\x41\x43MSolver.proto\x12\tACMSolver\"\xa7\x02\n\nASCampaign\x12\x12\n\nproblem_id\x18\x01 \x01(\t\x12\x1c\n\x14original_campaign_id\x18\x02 \x01(\x05\x12\x12\n\nis_network\x18\n \x01(\x08\x12\x12\n\nstart_date\x18\x03 \x01(\x05\x12\x14\n\x0c\x65xpired_date\x18\x04 \x01(\x05\x12\x10\n\x08priority\x18\x05 \x01(\x05\x12\x0c\n\x04type\x18\x06 \x01(\x05\x12\r\n\x05total\x18\x07 \x01(\x05\x12\x15\n\tplace_ids\x18\x08 \x03(\x05\x42\x02\x10\x01\x12\x33\n\x07weights\x18\t \x03(\x0b\x32\".ACMSolver.ASCampaign.WeightsEntry\x1a.\n\x0cWeightsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05:\x02\x38\x01\"\xe5\x01\n\x0b\x41SPlaceStat\x12\x12\n\nproblem_id\x18\x01 \x01(\t\x12\x19\n\x11original_place_id\x18\x02 \x01(\x05\x12.\n\x04\x63trs\x18\x03 \x03(\x0b\x32 .ACMSolver.ASPlaceStat.CtrsEntry\x12.\n\x0eprofiles_ratio\x18\x04 \x03(\x0b\x32\x16.ACMSolver.ProfileType\x12\x1a\n\x0e\x65stimate_views\x18\x05 \x03(\x05\x42\x02\x10\x01\x1a+\n\tCtrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x02:\x02\x38\x01\"0\n\x0bProfileType\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x13\n\x07\x64\x65tails\x18\x02 \x03(\x02\x42\x02\x10\x01\"a\n\x08\x41SResult\x12\x12\n\nproblem_id\x18\x01 \x01(\t\x12\x13\n\x0b\x63\x61mpaign_id\x18\x02 \x01(\x05\x12\x0c\n\x04\x64\x61te\x18\x03 \x01(\x05\x12\x10\n\x08place_id\x18\x04 \x01(\x03\x12\x0c\n\x04view\x18\x05 \x01(\x02\"\x1f\n\tSetResult\x12\x12\n\nset_result\x18\x01 \x01(\x08\"*\n\tShareRate\x12\x12\n\nproblem_id\x18\x01 \x01(\t\x12\t\n\x01r\x18\x02 \x01(\x02\x32\x8f\x02\n\tACMSolver\x12=\n\tSetPlaces\x12\x16.ACMSolver.ASPlaceStat\x1a\x14.ACMSolver.SetResult\"\x00(\x01\x12<\n\x0cSetShareRate\x12\x14.ACMSolver.ShareRate\x1a\x14.ACMSolver.SetResult\"\x00\x12>\n\x0bSetCampaign\x12\x15.ACMSolver.ASCampaign\x1a\x14.ACMSolver.SetResult\"\x00(\x01\x12\x45\n\x12SetNetworkCampaign\x12\x15.ACMSolver.ASCampaign\x1a\x14.ACMSolver.SetResult\"\x00(\x01\x62\x06proto3'
+  serialized_pb=b'\n\x0f\x41\x43MSolver.proto\x12\tACMSolver\x1a\x1fgoogle/protobuf/timestamp.proto\"c\n\x10SetPlacesRequest\x12(\n\nproblem_id\x18\x01 \x01(\x0b\x32\x14.ACMSolver.ProblemId\x12%\n\x05place\x18\x02 \x01(\x0b\x32\x16.ACMSolver.ASPlaceStat\"h\n\x13SetCampaignsRequest\x12(\n\nproblem_id\x18\x01 \x01(\x0b\x32\x14.ACMSolver.ProblemId\x12\'\n\x08\x63\x61mpaign\x18\x02 \x01(\x0b\x32\x15.ACMSolver.ASCampaign\"\xcb\x02\n\nASCampaign\x12\x1c\n\x14original_campaign_id\x18\x01 \x01(\x05\x12\x12\n\nis_network\x18\x02 \x01(\x08\x12.\n\nstart_date\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x30\n\x0c\x65xpired_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08priority\x18\x05 \x01(\x05\x12\x0c\n\x04type\x18\x06 \x01(\x05\x12\r\n\x05total\x18\x07 \x01(\x05\x12\x15\n\tplace_ids\x18\x08 \x03(\x05\x42\x02\x10\x01\x12\x33\n\x07weights\x18\t \x03(\x0b\x32\".ACMSolver.ASCampaign.WeightsEntry\x1a.\n\x0cWeightsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05:\x02\x38\x01\"\xd1\x01\n\x0b\x41SPlaceStat\x12\x19\n\x11original_place_id\x18\x02 \x01(\x05\x12.\n\x04\x63trs\x18\x03 \x03(\x0b\x32 .ACMSolver.ASPlaceStat.CtrsEntry\x12.\n\x0eprofiles_ratio\x18\x04 \x03(\x0b\x32\x16.ACMSolver.ProfileType\x12\x1a\n\x0e\x65stimate_views\x18\x05 \x03(\x05\x42\x02\x10\x01\x1a+\n\tCtrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x02:\x02\x38\x01\"0\n\x0bProfileType\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x13\n\x07\x64\x65tails\x18\x02 \x03(\x02\x42\x02\x10\x01\"\x93\x01\n\x08\x41SResult\x12(\n\nproblem_id\x18\x01 \x01(\x0b\x32\x14.ACMSolver.ProblemId\x12\x13\n\x0b\x63\x61mpaign_id\x18\x02 \x01(\x05\x12(\n\x04\x64\x61te\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08place_id\x18\x04 \x01(\x03\x12\x0c\n\x04view\x18\x05 \x01(\x02\"\x1f\n\tSetResult\x12\x12\n\nset_result\x18\x01 \x01(\x08\"@\n\tShareRate\x12(\n\nproblem_id\x18\x01 \x01(\x0b\x32\x14.ACMSolver.ProblemId\x12\t\n\x01r\x18\x02 \x01(\x02\"\x1f\n\tProblemId\x12\x12\n\nproblem_id\x18\x01 \x01(\t\"\r\n\x0bSolveStatus\"\x1b\n\x0bProblemType\x12\x0c\n\x04type\x18\x01 \x01(\t2\xd8\x03\n\tACMSolver\x12;\n\x0bInitProblem\x12\x16.ACMSolver.ProblemType\x1a\x14.ACMSolver.ProblemId\x12\x42\n\tSetPlaces\x12\x1b.ACMSolver.SetPlacesRequest\x1a\x14.ACMSolver.SetResult\"\x00(\x01\x12G\n\x0bSetCampaign\x12\x1e.ACMSolver.SetCampaignsRequest\x1a\x14.ACMSolver.SetResult\"\x00(\x01\x12N\n\x12SetNetworkCampaign\x12\x1e.ACMSolver.SetCampaignsRequest\x1a\x14.ACMSolver.SetResult\"\x00(\x01\x12<\n\x0cSetShareRate\x12\x14.ACMSolver.ShareRate\x1a\x14.ACMSolver.SetResult\"\x00\x12\x37\n\x05Solve\x12\x14.ACMSolver.ProblemId\x1a\x16.ACMSolver.SolveStatus\"\x00\x12:\n\tGetResult\x12\x14.ACMSolver.ProblemId\x1a\x13.ACMSolver.ASResult\"\x00\x30\x01\x62\x06proto3'
+  ,
+  dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
+
+
+
+
+_SETPLACESREQUEST = _descriptor.Descriptor(
+  name='SetPlacesRequest',
+  full_name='ACMSolver.SetPlacesRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='problem_id', full_name='ACMSolver.SetPlacesRequest.problem_id', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='place', full_name='ACMSolver.SetPlacesRequest.place', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=63,
+  serialized_end=162,
 )
 
 
+_SETCAMPAIGNSREQUEST = _descriptor.Descriptor(
+  name='SetCampaignsRequest',
+  full_name='ACMSolver.SetCampaignsRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='problem_id', full_name='ACMSolver.SetCampaignsRequest.problem_id', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='campaign', full_name='ACMSolver.SetCampaignsRequest.campaign', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=164,
+  serialized_end=268,
+)
 
 
 _ASCAMPAIGN_WEIGHTSENTRY = _descriptor.Descriptor(
@@ -59,8 +139,8 @@ _ASCAMPAIGN_WEIGHTSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=280,
-  serialized_end=326,
+  serialized_start=556,
+  serialized_end=602,
 )
 
 _ASCAMPAIGN = _descriptor.Descriptor(
@@ -72,70 +152,63 @@ _ASCAMPAIGN = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='problem_id', full_name='ACMSolver.ASCampaign.problem_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='original_campaign_id', full_name='ACMSolver.ASCampaign.original_campaign_id', index=1,
-      number=2, type=5, cpp_type=1, label=1,
+      name='original_campaign_id', full_name='ACMSolver.ASCampaign.original_campaign_id', index=0,
+      number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='is_network', full_name='ACMSolver.ASCampaign.is_network', index=2,
-      number=10, type=8, cpp_type=7, label=1,
+      name='is_network', full_name='ACMSolver.ASCampaign.is_network', index=1,
+      number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='start_date', full_name='ACMSolver.ASCampaign.start_date', index=3,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='start_date', full_name='ACMSolver.ASCampaign.start_date', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='expired_date', full_name='ACMSolver.ASCampaign.expired_date', index=4,
-      number=4, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='expired_date', full_name='ACMSolver.ASCampaign.expired_date', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='priority', full_name='ACMSolver.ASCampaign.priority', index=5,
+      name='priority', full_name='ACMSolver.ASCampaign.priority', index=4,
       number=5, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='type', full_name='ACMSolver.ASCampaign.type', index=6,
+      name='type', full_name='ACMSolver.ASCampaign.type', index=5,
       number=6, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='total', full_name='ACMSolver.ASCampaign.total', index=7,
+      name='total', full_name='ACMSolver.ASCampaign.total', index=6,
       number=7, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='place_ids', full_name='ACMSolver.ASCampaign.place_ids', index=8,
+      name='place_ids', full_name='ACMSolver.ASCampaign.place_ids', index=7,
       number=8, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=b'\020\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='weights', full_name='ACMSolver.ASCampaign.weights', index=9,
+      name='weights', full_name='ACMSolver.ASCampaign.weights', index=8,
       number=9, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -153,8 +226,8 @@ _ASCAMPAIGN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=31,
-  serialized_end=326,
+  serialized_start=271,
+  serialized_end=602,
 )
 
 
@@ -192,8 +265,8 @@ _ASPLACESTAT_CTRSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=515,
-  serialized_end=558,
+  serialized_start=771,
+  serialized_end=814,
 )
 
 _ASPLACESTAT = _descriptor.Descriptor(
@@ -205,35 +278,28 @@ _ASPLACESTAT = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='problem_id', full_name='ACMSolver.ASPlaceStat.problem_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='original_place_id', full_name='ACMSolver.ASPlaceStat.original_place_id', index=1,
+      name='original_place_id', full_name='ACMSolver.ASPlaceStat.original_place_id', index=0,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='ctrs', full_name='ACMSolver.ASPlaceStat.ctrs', index=2,
+      name='ctrs', full_name='ACMSolver.ASPlaceStat.ctrs', index=1,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='profiles_ratio', full_name='ACMSolver.ASPlaceStat.profiles_ratio', index=3,
+      name='profiles_ratio', full_name='ACMSolver.ASPlaceStat.profiles_ratio', index=2,
       number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='estimate_views', full_name='ACMSolver.ASPlaceStat.estimate_views', index=4,
+      name='estimate_views', full_name='ACMSolver.ASPlaceStat.estimate_views', index=3,
       number=5, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -251,8 +317,8 @@ _ASPLACESTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=329,
-  serialized_end=558,
+  serialized_start=605,
+  serialized_end=814,
 )
 
 
@@ -290,8 +356,8 @@ _PROFILETYPE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=560,
-  serialized_end=608,
+  serialized_start=816,
+  serialized_end=864,
 )
 
 
@@ -305,8 +371,8 @@ _ASRESULT = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='problem_id', full_name='ACMSolver.ASResult.problem_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -319,8 +385,8 @@ _ASRESULT = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='date', full_name='ACMSolver.ASResult.date', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -350,8 +416,8 @@ _ASRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=610,
-  serialized_end=707,
+  serialized_start=867,
+  serialized_end=1014,
 )
 
 
@@ -382,8 +448,8 @@ _SETRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=709,
-  serialized_end=740,
+  serialized_start=1016,
+  serialized_end=1047,
 )
 
 
@@ -397,8 +463,8 @@ _SHARERATE = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='problem_id', full_name='ACMSolver.ShareRate.problem_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -421,22 +487,139 @@ _SHARERATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=742,
-  serialized_end=784,
+  serialized_start=1049,
+  serialized_end=1113,
 )
 
+
+_PROBLEMID = _descriptor.Descriptor(
+  name='ProblemId',
+  full_name='ACMSolver.ProblemId',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='problem_id', full_name='ACMSolver.ProblemId.problem_id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1115,
+  serialized_end=1146,
+)
+
+
+_SOLVESTATUS = _descriptor.Descriptor(
+  name='SolveStatus',
+  full_name='ACMSolver.SolveStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1148,
+  serialized_end=1161,
+)
+
+
+_PROBLEMTYPE = _descriptor.Descriptor(
+  name='ProblemType',
+  full_name='ACMSolver.ProblemType',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='ACMSolver.ProblemType.type', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1163,
+  serialized_end=1190,
+)
+
+_SETPLACESREQUEST.fields_by_name['problem_id'].message_type = _PROBLEMID
+_SETPLACESREQUEST.fields_by_name['place'].message_type = _ASPLACESTAT
+_SETCAMPAIGNSREQUEST.fields_by_name['problem_id'].message_type = _PROBLEMID
+_SETCAMPAIGNSREQUEST.fields_by_name['campaign'].message_type = _ASCAMPAIGN
 _ASCAMPAIGN_WEIGHTSENTRY.containing_type = _ASCAMPAIGN
+_ASCAMPAIGN.fields_by_name['start_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASCAMPAIGN.fields_by_name['expired_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _ASCAMPAIGN.fields_by_name['weights'].message_type = _ASCAMPAIGN_WEIGHTSENTRY
 _ASPLACESTAT_CTRSENTRY.containing_type = _ASPLACESTAT
 _ASPLACESTAT.fields_by_name['ctrs'].message_type = _ASPLACESTAT_CTRSENTRY
 _ASPLACESTAT.fields_by_name['profiles_ratio'].message_type = _PROFILETYPE
+_ASRESULT.fields_by_name['problem_id'].message_type = _PROBLEMID
+_ASRESULT.fields_by_name['date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_SHARERATE.fields_by_name['problem_id'].message_type = _PROBLEMID
+DESCRIPTOR.message_types_by_name['SetPlacesRequest'] = _SETPLACESREQUEST
+DESCRIPTOR.message_types_by_name['SetCampaignsRequest'] = _SETCAMPAIGNSREQUEST
 DESCRIPTOR.message_types_by_name['ASCampaign'] = _ASCAMPAIGN
 DESCRIPTOR.message_types_by_name['ASPlaceStat'] = _ASPLACESTAT
 DESCRIPTOR.message_types_by_name['ProfileType'] = _PROFILETYPE
 DESCRIPTOR.message_types_by_name['ASResult'] = _ASRESULT
 DESCRIPTOR.message_types_by_name['SetResult'] = _SETRESULT
 DESCRIPTOR.message_types_by_name['ShareRate'] = _SHARERATE
+DESCRIPTOR.message_types_by_name['ProblemId'] = _PROBLEMID
+DESCRIPTOR.message_types_by_name['SolveStatus'] = _SOLVESTATUS
+DESCRIPTOR.message_types_by_name['ProblemType'] = _PROBLEMTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+SetPlacesRequest = _reflection.GeneratedProtocolMessageType('SetPlacesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _SETPLACESREQUEST,
+  '__module__' : 'ACMSolver_pb2'
+  # @@protoc_insertion_point(class_scope:ACMSolver.SetPlacesRequest)
+  })
+_sym_db.RegisterMessage(SetPlacesRequest)
+
+SetCampaignsRequest = _reflection.GeneratedProtocolMessageType('SetCampaignsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _SETCAMPAIGNSREQUEST,
+  '__module__' : 'ACMSolver_pb2'
+  # @@protoc_insertion_point(class_scope:ACMSolver.SetCampaignsRequest)
+  })
+_sym_db.RegisterMessage(SetCampaignsRequest)
 
 ASCampaign = _reflection.GeneratedProtocolMessageType('ASCampaign', (_message.Message,), {
 
@@ -496,6 +679,27 @@ ShareRate = _reflection.GeneratedProtocolMessageType('ShareRate', (_message.Mess
   })
 _sym_db.RegisterMessage(ShareRate)
 
+ProblemId = _reflection.GeneratedProtocolMessageType('ProblemId', (_message.Message,), {
+  'DESCRIPTOR' : _PROBLEMID,
+  '__module__' : 'ACMSolver_pb2'
+  # @@protoc_insertion_point(class_scope:ACMSolver.ProblemId)
+  })
+_sym_db.RegisterMessage(ProblemId)
+
+SolveStatus = _reflection.GeneratedProtocolMessageType('SolveStatus', (_message.Message,), {
+  'DESCRIPTOR' : _SOLVESTATUS,
+  '__module__' : 'ACMSolver_pb2'
+  # @@protoc_insertion_point(class_scope:ACMSolver.SolveStatus)
+  })
+_sym_db.RegisterMessage(SolveStatus)
+
+ProblemType = _reflection.GeneratedProtocolMessageType('ProblemType', (_message.Message,), {
+  'DESCRIPTOR' : _PROBLEMTYPE,
+  '__module__' : 'ACMSolver_pb2'
+  # @@protoc_insertion_point(class_scope:ACMSolver.ProblemType)
+  })
+_sym_db.RegisterMessage(ProblemType)
+
 
 _ASCAMPAIGN_WEIGHTSENTRY._options = None
 _ASCAMPAIGN.fields_by_name['place_ids']._options = None
@@ -510,25 +714,25 @@ _ACMSOLVER = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=787,
-  serialized_end=1058,
+  serialized_start=1193,
+  serialized_end=1665,
   methods=[
   _descriptor.MethodDescriptor(
-    name='SetPlaces',
-    full_name='ACMSolver.ACMSolver.SetPlaces',
+    name='InitProblem',
+    full_name='ACMSolver.ACMSolver.InitProblem',
     index=0,
     containing_service=None,
-    input_type=_ASPLACESTAT,
-    output_type=_SETRESULT,
+    input_type=_PROBLEMTYPE,
+    output_type=_PROBLEMID,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
-    name='SetShareRate',
-    full_name='ACMSolver.ACMSolver.SetShareRate',
+    name='SetPlaces',
+    full_name='ACMSolver.ACMSolver.SetPlaces',
     index=1,
     containing_service=None,
-    input_type=_SHARERATE,
+    input_type=_SETPLACESREQUEST,
     output_type=_SETRESULT,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
@@ -538,7 +742,7 @@ _ACMSOLVER = _descriptor.ServiceDescriptor(
     full_name='ACMSolver.ACMSolver.SetCampaign',
     index=2,
     containing_service=None,
-    input_type=_ASCAMPAIGN,
+    input_type=_SETCAMPAIGNSREQUEST,
     output_type=_SETRESULT,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
@@ -548,8 +752,38 @@ _ACMSOLVER = _descriptor.ServiceDescriptor(
     full_name='ACMSolver.ACMSolver.SetNetworkCampaign',
     index=3,
     containing_service=None,
-    input_type=_ASCAMPAIGN,
+    input_type=_SETCAMPAIGNSREQUEST,
     output_type=_SETRESULT,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetShareRate',
+    full_name='ACMSolver.ACMSolver.SetShareRate',
+    index=4,
+    containing_service=None,
+    input_type=_SHARERATE,
+    output_type=_SETRESULT,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Solve',
+    full_name='ACMSolver.ACMSolver.Solve',
+    index=5,
+    containing_service=None,
+    input_type=_PROBLEMID,
+    output_type=_SOLVESTATUS,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetResult',
+    full_name='ACMSolver.ACMSolver.GetResult',
+    index=6,
+    containing_service=None,
+    input_type=_PROBLEMID,
+    output_type=_ASRESULT,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
