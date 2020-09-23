@@ -1,6 +1,7 @@
 # AcmSolver
 AcmSolver service
 
+Chạy file server: /AcmSolver/AcmSolver_server.py
 
 .proto file in `proto/` <br>
 server file: `AcmSolver_server` in `AcmSolver/`<br>
